@@ -49,6 +49,8 @@ namespace ReactDemo.Services
                     Time = 8,
                     TransportBy = "Oceanic"
                 });
+
+                lastLocationId = locationId;
             }
 
             return new SearchRouteModel()
