@@ -8,6 +8,9 @@ export class LocationList extends Component {
   render() {
     return (
       <div>
+        <h4>Locations</h4>
+
+        <a class="btn btn-primary">+ Add</a>
         <table className="table">
           <tbody>
           <tr>
@@ -22,7 +25,7 @@ export class LocationList extends Component {
 
             <td>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="/editRoutes" className="btn btn-primary">Edit</a>
+              <a href="/editLocations" className="btn btn-primary">Edit</a>
               <a href="/routes/" className="btn btn-danger">Disable</a>
             </div>
             </td>
@@ -32,7 +35,7 @@ export class LocationList extends Component {
             <td>LOCATIONB</td>
             <td>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="/editRoutes" className="btn btn-primary">Edit</a>
+              <a href="/editLocations" className="btn btn-primary">Edit</a>
               <a href="/routes/" className="btn btn-success">Enable</a>
             </div>
             </td>

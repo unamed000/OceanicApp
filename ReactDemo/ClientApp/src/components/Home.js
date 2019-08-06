@@ -25,6 +25,15 @@ export class Home extends Component {
           <div class="form-group">
           <label for="email">Parcel weight</label>
               <input type="number" class="form-control" placeholder="kg"/>
+ 
+          </div>
+          <div class="form-group">
+              <label for="email">Product Type</label>
+              <select class="form-control">
+                <option>Option A</option>
+                <option>Option B</option>
+                <option>Option C</option>
+              </select>
           </div>
           <button type="submit" class="btn btn-primary">Search</button>
        </div>

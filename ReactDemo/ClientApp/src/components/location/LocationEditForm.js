@@ -5,42 +5,56 @@ export class LocationEditForm extends Component {
   constructor(props) {
     super(props);
     this.state = { currentCount: 0 };
-    this.incrementCounter = this.incrementCounter.bind(this);
   }
 
   render() {
     return (
       <div>
+        <div class="form-group">
+          <label for="email">Location Name</label>
+          <input class="form-control"/>
+
+        </div>
+        <div class="form-group">
+          <label for="email">Location Code</label>
+          <input class="form-control"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-default">Cancel</button>
+
+        <h4>Connect to location</h4>
+        <div>
         <table className="table">
           <tbody>
           <tr>
-            <th>From</th>
-            <th>To</th> 
-            <th></th>
-          </tr>
-          <tr>
-            <td>Location A</td>
-            <td>Location B</td> 
-            <td>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="/editRoutes" className="btn btn-primary">Edit</a>
-              <a href="/routes/" className="btn btn-danger">Disable</a>
-            </div>
-            </td>
+            <th>Location</th>
           </tr>
           <tr>
             <td>Location B</td>
-            <td>Location A</td> 
-            <td>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="/editRoutes" className="btn btn-primary">Edit</a>
-              <a href="/routes/" className="btn btn-success">Enable</a>
-            </div>
-            </td>
+          </tr>
+          <tr>
+            <td>Location C</td> 
           </tr>
           </tbody>
         </table>
-      </div>
-    );
+
+        <h4>Connect from location</h4>
+        <table className="table">
+          <tbody>
+          <tr>
+            <th>Location</th>
+          </tr>
+          <tr>
+            <td>Location D</td>
+          </tr>
+          <tr>
+            <td>Location E</td> 
+          </tr>
+          </tbody>
+        </table>
+        </div>
+     </div>
+    )
   }
 }

@@ -6,6 +6,8 @@ import { LocationList } from './components/location/LocationList';
 import { LocationEditForm } from './components/location/LocationEditForm';
 import { RouteList } from './components/route/RouteList';
 import { RouteEditForm } from './components/route/RouteEditForm';
+import { Settings } from './components/settings/Settings';
+
 export default class App extends Component {
   displayName = App.name
 
@@ -14,10 +16,12 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/locations' component={LocationList} />
-        <Route path='/locations/edit' component={LocationEditForm} />
+        <Route path='/editLocations' component={LocationEditForm} />
 
         <Route path='/routes' component={RouteList} />
         <Route path='/editRoutes' component={RouteEditForm} />
+
+        <Route path='/settings' component={Settings} />
 
       </Layout>
     );

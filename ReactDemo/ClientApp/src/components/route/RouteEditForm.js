@@ -14,9 +14,9 @@ export class RouteEditForm extends Component {
         <div class="form-group">
         <label for="email">Departure</label>
         <select class="form-control">
-                <option>Location A</option>
-                <option>Location B</option>
-                <option>Location C</option>
+            <option>Location A</option>
+            <option>Location B</option>
+            <option>Location C</option>
         </select>
       
         </div>

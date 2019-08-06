@@ -9,11 +9,13 @@ export class RouteList extends Component {
   render() {
     return (
       <div>
+        <h4>Routes</h4>
+        <a class="btn btn-primary">+ Add</a>
         <table className="table">
           <tbody>
           <tr>
-            <th>From</th>
-            <th>To</th> 
+            <th>Departure</th>
+            <th>Destination</th> 
             <th></th>
           </tr>
           <tr>
