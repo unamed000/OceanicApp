@@ -22,7 +22,7 @@ export class RouteEditForm extends Component {
         </div>
         
         <div class="form-group">
-        <label for="email">Departure</label>
+        <label for="email">Destination</label>
         <select class="form-control">
             <option>Location A</option>
             <option>Location B</option>

@@ -13,17 +13,23 @@ export class LocationEditForm extends Component {
         <div class="form-group">
           <label for="email">Location Name</label>
           <input class="form-control"/>
-
         </div>
         <div class="form-group">
           <label for="email">Location Code</label>
           <input class="form-control"/>
         </div>
+        <div class="form-group">
+          <label for="email">Status</label>
+          <select class="form-control">
+            <option selected>Disabled</option>
+            <option>Enabled</option>
+          </select>
+        </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
         <button type="submit" class="btn btn-default">Cancel</button>
 
-        <h4>Connect to location</h4>
+        {/* <h4>Connect to location</h4>
         <div>
         <table className="table">
           <tbody>
@@ -53,7 +59,7 @@ export class LocationEditForm extends Component {
           </tr>
           </tbody>
         </table>
-        </div>
+        </div> */}
      </div>
     )
   }

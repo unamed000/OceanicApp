@@ -15,7 +15,7 @@ export class ProductTypeForm extends Component {
           <input class="form-control"/>
         </div>
         <div class="form-group">
-          <label for="email">Multiplier</label>
+          <label for="email">Aditional Cost</label>
           <input class="form-control" type="number"/>
         </div>
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 export class Settings extends Component {
   constructor(props){
     super(props);
@@ -14,10 +13,12 @@ export class Settings extends Component {
             <input type="number" class="form-control" value="8"/>
          </div>
 
+         <button type="submit" class="btn btn-primary">Submit</button>
+
          <div class="form-group">
              <div class="col-md-12">
                 <label for="email">Product Weight Config</label>
-                <a class="btn btn-primary" href="/editWeightConfig">+</a>
+                <a class="btn btn-primary" href="/editWeightConfig" title="Add new price by weight">+</a>
              </div>
             <table className="table">
             <tbody>
@@ -51,7 +52,7 @@ export class Settings extends Component {
          <div class="form-group">
              <div class="col-md-12">
                 <label for="email">Product Type Config</label>
-                <a class="btn btn-primary" href="/editProductTypeConfig">+</a>
+                <a class="btn btn-primary" href="/editProductTypeConfig" title="Add new price by product type">+</a>
              </div>
             <table className="table">
             <tbody>
@@ -82,8 +83,7 @@ export class Settings extends Component {
             </table>
          </div>
 
-         <button type="submit" class="btn btn-primary">Submit</button>
-         <button type="submit" class="btn btn-default">Cancel</button>
+       
  
         </div>
        );
