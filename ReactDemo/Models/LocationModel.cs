@@ -6,6 +6,7 @@ namespace ReactDemo.Models
     {
         public int LocationId { get; set; }
         public string Name { get; set; }
+        public string Code { get; set; }
 
         public bool Equals(LocationModel other)
         {
