@@ -19,7 +19,7 @@ namespace ReactDemo.Db
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Route> Route { get; set; }
         public virtual DbSet<ProductType> ProductType { get; set; }
-        public virtual DbSet<WeightCostSetting> WeightCostSettings { get; set; }
+        public virtual DbSet<WeightCostSetting> WeightCostSetting { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

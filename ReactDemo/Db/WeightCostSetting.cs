@@ -3,8 +3,8 @@
     public class WeightCostSetting
     {
         public int Id { get; set; }
-        public double WeightFrom { get; set; }
-        public double WeightTo { get; set; }
-        public double Cost { get; set; }
+        public decimal WeightFrom { get; set; }
+        public decimal WeightTo { get; set; }
+        public decimal Cost { get; set; }
     }
 }

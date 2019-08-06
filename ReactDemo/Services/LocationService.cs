@@ -13,11 +13,9 @@ namespace ReactDemo.Services
     {
         public List<LocationModel> GetLocations()
         {
-            return Db.Location.Select(x => new LocationModel
-            {
-                Name = x.Name,
-                Code = x.Code
-            }).ToList();
+            return Db.Location.AsEnumerable()
+                .Select(x => new LocationModel(x))
+                .ToList();
         }
 
         public bool AddLocation(LocationModel locationModel)

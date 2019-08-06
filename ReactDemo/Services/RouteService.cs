@@ -26,8 +26,10 @@ namespace ReactDemo.Services
             var productType =
                 Db.ProductType.First(x => x.Id == productTypeId);
 
+            decimal decWeight = (decimal)weight;
+
             var weightConfig =
-                Db.WeightCostSettings.First(x => x.WeightFrom <= weight || x.WeightTo >= weight);
+                Db.WeightCostSetting.First(x => x.WeightFrom <= decWeight && x.WeightTo >= decWeight);
 
             var locations = Db.Location.ToList();
             var path = FindRoutes(locations, routes, departureCode, destinationCode);
@@ -57,7 +59,7 @@ namespace ReactDemo.Services
 
         double PriceCalculate(WeightCostSetting weightSetting, ProductType productType)
         {
-            return weightSetting.Cost * productType.Multiplier;
+            return (double)weightSetting.Cost * (double)productType.Multiplier;
         }
 
         int[] FindRoutes(
@@ -92,7 +94,7 @@ namespace ReactDemo.Services
                 locationMapping[destinationLocation.Id]); //result contains the shortest path
 
             var path = result.GetPath();
-            return path.Select(x => locationMapping.First(lm => lm.Key == x).Key).ToArray();
+            return path.Select(x => locationMapping.First(lm => lm.Value == x).Key).ToArray();
         }
     }
 }
