@@ -17,7 +17,7 @@ export class Settings extends Component {
          <div class="form-group">
              <div class="col-md-12">
                 <label for="email">Product Weight Config</label>
-                <a class="btn btn-primary">+</a>
+                <a class="btn btn-primary" href="/editWeightConfig">+</a>
              </div>
             <table className="table">
             <tbody>
@@ -31,7 +31,7 @@ export class Settings extends Component {
                 <td>1</td>
                 <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="/routes/" className="btn btn-danger">Disable</a>
+                <a href="/routes/" className="btn btn-danger">Delete</a>
                 </div>
                 </td>
             </tr>
@@ -40,7 +40,7 @@ export class Settings extends Component {
                 <td>2.5</td>
                 <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="/routes/" className="btn btn-danger">Disable</a>
+                <a href="/routes/" className="btn btn-danger">Delete</a>
                 </div>
                 </td>
             </tr>
@@ -51,7 +51,7 @@ export class Settings extends Component {
          <div class="form-group">
              <div class="col-md-12">
                 <label for="email">Product Type Config</label>
-                <a class="btn btn-primary">+</a>
+                <a class="btn btn-primary" href="/editProductTypeConfig">+</a>
              </div>
             <table className="table">
             <tbody>
@@ -61,21 +61,21 @@ export class Settings extends Component {
                 <th></th>
             </tr>
             <tr>
-                <td>0</td>
+                <td>Normal</td>
                 <td>1</td>
                 <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="/routes/" className="btn btn-danger">Disable</a>
+                <a href="/routes/" className="btn btn-danger">Delete</a>
                 </div>
                 </td>
             </tr>
             <tr>
-                <td>1</td>
-                    <td>1.2 (20% higher)</td>
-                    <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href="/routes/" className="btn btn-danger">Disable</a>
-                    </div>
+                <td>Weapon</td>
+                <td>1.2 (20% higher)</td>
+                <td>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="/routes/" className="btn btn-danger">Delete</a>
+                </div>
                 </td>
             </tr>
             </tbody>

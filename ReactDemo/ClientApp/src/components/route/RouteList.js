@@ -34,7 +34,7 @@ export class RouteList extends Component {
             <td>
             <div class="btn-group" role="group" aria-label="Basic example">
               <a href="/editRoutes" className="btn btn-primary">Edit</a>
-              <a href="/routes/" className="btn btn-success">Enable</a>
+              <a href="/routes" className="btn btn-success">Enable</a>
             </div>
             </td>
           </tr>

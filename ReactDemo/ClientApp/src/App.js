@@ -7,6 +7,8 @@ import { LocationEditForm } from './components/location/LocationEditForm';
 import { RouteList } from './components/route/RouteList';
 import { RouteEditForm } from './components/route/RouteEditForm';
 import { Settings } from './components/settings/Settings';
+import { WeightConfigForm } from './components/settings/WeightConfigForm';
+import { ProductTypeForm } from './components/settings/ProductTypeForm';
 
 export default class App extends Component {
   displayName = App.name
@@ -22,7 +24,8 @@ export default class App extends Component {
         <Route path='/editRoutes' component={RouteEditForm} />
 
         <Route path='/settings' component={Settings} />
-
+        <Route path='/editWeightConfig' component={WeightConfigForm} />
+        <Route path='/editProductTypeConfig' component={ProductTypeForm} />
       </Layout>
     );
   }

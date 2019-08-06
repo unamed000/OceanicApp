@@ -20,9 +20,7 @@ export class Dashboard extends Component {
   
         <Route exact path='/routes' component={RouteList} />
         <Route path='/routes/edit' component={RouteEditForm} />
-
-        <Route path='/settings' component={Settings} />
-
+        
       </Layout>
       );
     }

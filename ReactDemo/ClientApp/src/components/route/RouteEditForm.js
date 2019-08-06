@@ -11,6 +11,7 @@ export class RouteEditForm extends Component {
     render() {
       return (
        <div>
+           
         <div class="form-group">
         <label for="email">Departure</label>
         <select class="form-control">
@@ -18,8 +19,8 @@ export class RouteEditForm extends Component {
             <option>Location B</option>
             <option>Location C</option>
         </select>
-      
         </div>
+        
         <div class="form-group">
         <label for="email">Departure</label>
         <select class="form-control">
