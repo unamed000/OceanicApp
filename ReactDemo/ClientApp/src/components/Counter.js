@@ -18,13 +18,25 @@ export class Counter extends Component {
   render() {
     return (
       <div>
-        <h1>Counter</h1>
-        <h2>This is another header, seem cool enough</h2>
-        <p>This is a simple example of a React component.</p>
-
-        <p>Current count: <strong>{this.state.currentCount}</strong></p>
-
-        <button onClick={this.incrementCounter}>Increment</button>
+        <table>
+          <tbody>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th> 
+            <th>Age</th>
+          </tr>
+          <tr>
+            <td>Jill</td>
+            <td>Smith</td> 
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>Eve</td>
+            <td>Jackson</td> 
+            <td>94</td>
+          </tr>          
+  </tbody>
+        </table>
       </div>
     );
   }
