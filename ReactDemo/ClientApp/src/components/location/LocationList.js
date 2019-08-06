@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { LocationEditForm } from './LocationEditForm';
+import { Switch, Route } from 'react-router';
 
 export class LocationList extends Component {
   constructor(props) {
@@ -25,7 +27,7 @@ export class LocationList extends Component {
 
             <td>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="/editLocations" className="btn btn-primary">Edit</a>
+              <a href="/dashboard/locations/1" className="btn btn-primary">Edit</a>
               <a href="/routes/" className="btn btn-danger">Disable</a>
             </div>
             </td>
@@ -35,13 +37,14 @@ export class LocationList extends Component {
             <td>LOCATIONB</td>
             <td>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="/editLocations" className="btn btn-primary">Edit</a>
+              <a href="/dashboard/locations/1" className="btn btn-primary">Edit</a>
               <a href="/routes/" className="btn btn-success">Enable</a>
             </div>
             </td>
           </tr>
           </tbody>
         </table>
+
       </div>
     );
   }

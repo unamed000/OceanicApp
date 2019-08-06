@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
+import { Switch, Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { LocationList } from './components/location/LocationList';
@@ -16,16 +16,20 @@ export default class App extends Component {
   render() {
     return (
       <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/locations' component={LocationList} />
-        <Route path='/editLocations' component={LocationEditForm} />
+        <Switch>
+          <Route exact path='/dashboard' component={Home} />
 
-        <Route path='/routes' component={RouteList} />
-        <Route path='/editRoutes' component={RouteEditForm} />
+          <Route path='/dashboard/locations/:locationId' component={LocationEditForm}/>
+          <Route path='/dashboard/locations' component={LocationList} />
+          
+          <Route path='/dashboard/routes' component={RouteList} />
+          <Route path='/dashboard/editRoutes' component={RouteEditForm} />
 
-        <Route path='/settings' component={Settings} />
-        <Route path='/editWeightConfig' component={WeightConfigForm} />
-        <Route path='/editProductTypeConfig' component={ProductTypeForm} />
+          <Route path='/dashboard/settings' component={Settings} />
+          <Route path='/dashboard/editWeightConfig' component={WeightConfigForm} />
+          <Route path='/dashboard/editProductTypeConfig' component={ProductTypeForm} />
+        </Switch>
+ 
       </Layout>
     );
   }
