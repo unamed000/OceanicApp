@@ -5,16 +5,22 @@ namespace ReactDemo.Models
 {
     public class LocationModel : IEquatable<LocationModel>
     {
+        public LocationModel()
+        {
+
+        }
         public LocationModel(Location location)
         {
             LocationId = location.Id;
             Name = location.Name;
             Code = location.Code;
+            IsActive = location.IsActive;
         }
 
         public int LocationId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
+        public bool IsActive { get; set; }
 
         public bool Equals(LocationModel other)
         {
