@@ -6,7 +6,6 @@ export class LocationList extends Component {
   constructor(props) {
     super(props);
     this.state = { locations: [] };
-    this.fetchData();
   }
 
   onToggleActiveClicked(location, component)
@@ -33,11 +32,23 @@ export class LocationList extends Component {
     });
   }
 
+  componentDidMount() {
+    this.fetchData();
+  }
+
   fetchData()
   {
-    fetch('api/location/getAll')
+    var myHeaders = new Headers();
+    myHeaders.append('pragma', 'no-cache');
+    myHeaders.append('cache-control', 'no-cache');
+
+    fetch('api/location/getAll', {
+      method: "GET",
+      headers: myHeaders
+    })
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       this.setState({ locations: data, loading: false });
     });
   }

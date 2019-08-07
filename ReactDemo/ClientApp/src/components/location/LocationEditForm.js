@@ -7,10 +7,11 @@ export class LocationEditForm extends Component {
   constructor(props) {
     super(props);
     this.state = { location: {
-      id: 0,
-      name: "",
-      code: "",
-    } };
+        id: 0,
+        name: "",
+        code: "",
+      } 
+    };
     fetch('api/location/getById?id=' + this.props.match.params.locationId)
         .then(response => response.json())
         .then(data => {
@@ -39,19 +40,38 @@ export class LocationEditForm extends Component {
     });
   }
 
+  handleChange(event) {
+    let fieldName = event.target.name;
+    let fleldVal = event.target.value;
+    console.log(event.target.name);
+    console.log(event.target.value);
+
+    this.setState({location: {...this.state.location, [fieldName]: fleldVal}})
+  }
+
   render() {
     var location = this.state.location;
     return (
       <div>
         <Form ref="locationForm" onSubmit={(e) => this.handleFormSubmit(e, this)}>
           <FormGroup controlId="formLocationName" required>
-            <label for="email">Location Name</label>
-            <FormControl type="location" placeholder="Enter location" value={location.name} />
+            <label for="name">Location Name</label>
+            <FormControl 
+              type="text" placeholder="Enter location" value={location.name} 
+              name='name' 
+              onChange={this.handleChange.bind(this)} 
+              />
           </FormGroup>
 
           <FormGroup controlId="formLocationCode" required>
             <label for="email">Location Code</label>
-            <FormControl type="location" placeholder="Enter location" value={location.code} />
+            <FormControl 
+                type="text" 
+                placeholder="Enter location code" 
+                value={location.code}
+                name='code' 
+                onChange={this.handleChange.bind(this)} 
+            />
           </FormGroup>
 
           <Button type="submit" variant="outline-success" className="btn-primary">
@@ -62,7 +82,7 @@ export class LocationEditForm extends Component {
           </Button>
         </Form>
          
-        <h4>Connect to location</h4>
+        {/* <h4>Connect to location</h4>
         <div>
           <table className="table">
             <tbody>
@@ -92,7 +112,7 @@ export class LocationEditForm extends Component {
             </tr>
             </tbody>
           </table>
-        </div>
+        </div> */}
      </div>
     )
   }
