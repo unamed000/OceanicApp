@@ -28,7 +28,7 @@ namespace ReactDemo.Controllers
         [HttpPost("[action]")]
         public bool AddLocation(LocationModel model)
         {
-            return _locationService.AddLocation(model);
+            return _locationService.AddOrUpdateLocation(model);
         }
 
         [HttpPost("[action]")]

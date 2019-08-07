@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using ReactDemo.Db;
 using ReactDemo.Models;
 using Location = ReactDemo.Db.Location;
 
@@ -18,19 +14,27 @@ namespace ReactDemo.Services
                 .ToList();
         }
 
-        public bool AddLocation(LocationModel locationModel)
+        public bool AddOrUpdateLocation(LocationModel locationModel)
         {
             if (Db.Location.Any(x => x.Code == locationModel.Code))
             {
                 return false;
             }
 
-            Db.Location.Add(new Location
+            Location location;
+
+            if (locationModel.LocationId != default(int))
             {
-                Name = locationModel.Name,
-                Code = locationModel.Code,
-                IsActive = true
-            });
+                location = Db.Location.First(x => x.Id == locationModel.LocationId);
+            }
+            else
+            {
+                location = new Location();
+                Db.Location.Add(location);
+            }
+
+            location.Name = locationModel.Name;
+            location.Code = locationModel.Code;
             Db.SaveChanges();
 
             return true;
