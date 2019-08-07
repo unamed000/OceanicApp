@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, FormControl, FormGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 
 export class RouteEditForm extends Component {
   
@@ -7,7 +8,7 @@ export class RouteEditForm extends Component {
     super(props);
     this.state = { 
       route: {
-        id: 0,
+        routeId: this.props.match.params.routeId,
         departureId: 0,
         destinationId: 0
       },
@@ -19,7 +20,11 @@ export class RouteEditForm extends Component {
       fetch('api/route/getById?id=' + routeId)
         .then(response => response.json())
         .then(data => {
-          this.setState({...this.state, route: data, loading: false });
+          this.setState({...this.state, route: {
+            ...data, 
+            departureLocationId: data.departureLocation.locationId,
+            destinationLocationId: data.destinationLocation.locationId }, 
+            loading: false });
         });
     }
 
@@ -33,14 +38,15 @@ export class RouteEditForm extends Component {
   renderOptions(locations)
   {
     if(locations == undefined) return;
+
     return locations.map(item =>
-      <option value={item.id}>{item.name}</option>    
+      <option value={item.locationId}>{item.name}</option>    
     );
   }
 
   handleFormSubmit(e, component){
     e.preventDefault();
-    fetch("api/update/addOrUpdateRoute", {
+    fetch("api/route/addOrUpdateRoute", {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',                  
@@ -66,34 +72,35 @@ export class RouteEditForm extends Component {
   
   render() {
     var route = this.state.route;
+    console.log(route);
     return (
       <div>
       <Form ref="locationForm" onSubmit={(e) => this.handleFormSubmit(e, this)}
         onSubmit={(e) => this.handleFormSubmit(e, this)}>
         <div class="form-group">
-          <label for="departureId">Departure</label>
-          <Form.Control as="select">
-            value={route.departureId}
+          <label for="departureLocationId">Departure</label>
+          <select
+            value={route.departureLocationId}
             class="form-control" 
-            name='departureId' 
+            name='departureLocationId' 
             onChange={this.handleChange.bind(this)}>
           {this.renderOptions(this.state.locations)}
-          </Form.Control>
+          </select>
         </div>
         
         <div class="form-group">
-          <label for="destinationId">Destination</label>
+          <label for="destinationLocationId">Destination</label>
           <select 
-            value={route.destinationId}
+            value={route.destinationLocationId}
             class="form-control" 
-            name='departureId' 
+            name='destinationLocationId' 
             onChange={this.handleChange.bind(this)}>
           {this.renderOptions(this.state.locations)}
           </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="submit" class="btn btn-default">Cancel</button>
+        <Link to="/dashboard/routes" className="btn btn-default">Close</Link>
       </Form>
       </div>
       );

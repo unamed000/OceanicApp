@@ -1,10 +1,15 @@
+using System.Linq;
+using System.Threading.Tasks;
+using Bazinga.AspNetCore.Authentication.Basic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ReactDemo.Db;
 
 namespace ReactDemo
 {
@@ -21,7 +26,16 @@ namespace ReactDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAuthentication(BasicAuthenticationDefaults.AuthenticationScheme)
+                .AddBasicAuthentication(credentials =>
+                    {
+                        var db = new OceanicDbContext();
 
+                        return Task.FromResult
+                            (db.User.Any(x => x.Username == credentials.username 
+                                && x.Password == credentials.password));
+                    }
+                );
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -45,7 +59,7 @@ namespace ReactDemo
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

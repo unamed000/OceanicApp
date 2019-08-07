@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ReactDemo.Models;
 using ReactDemo.Services;
@@ -6,6 +7,7 @@ using ReactDemo.Services;
 namespace ReactDemo.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class RouteController : Controller
     {
         private readonly RouteService _service;

@@ -16,7 +16,7 @@ namespace ReactDemo.Db
             : base(options)
         {
         }
-
+        public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Route> Route { get; set; }
         public virtual DbSet<ProductType> ProductType { get; set; }
@@ -78,6 +78,13 @@ namespace ReactDemo.Db
                 entity.Property(x => x.Depth).IsRequired();
                 entity.Property(x => x.Height).IsRequired();
                 entity.Property(x => x.Width).IsRequired();
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Username).IsRequired();
+                entity.Property(x => x.Password).IsRequired();
             });
         }
     }

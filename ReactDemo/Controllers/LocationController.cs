@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using ReactDemo.Models;
@@ -10,6 +11,7 @@ using ReactDemo.Services;
 namespace ReactDemo.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class LocationController : Controller
     {
         private LocationService _locationService;

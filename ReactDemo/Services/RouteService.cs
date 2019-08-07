@@ -156,7 +156,7 @@ namespace ReactDemo.Services
         {
             Route route;
 
-            if (routeModel.Id != default(int))
+            if (routeModel.RouteId != default(int))
             {
                 route = Db.Route.First(x => x.IsActive);
             }
