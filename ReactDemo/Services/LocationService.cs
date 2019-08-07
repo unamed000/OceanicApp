@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using ReactDemo.Models;
 using Location = ReactDemo.Db.Location;
 
@@ -16,7 +17,8 @@ namespace ReactDemo.Services
 
         public bool AddOrUpdateLocation(LocationModel locationModel)
         {
-            if (Db.Location.Any(x => x.Code == locationModel.Code))
+            if (locationModel.LocationId == default(int) 
+                && Db.Location.Any(x => x.Code == locationModel.Code))
             {
                 return false;
             }
@@ -40,7 +42,10 @@ namespace ReactDemo.Services
             return true;
         }
 
-        public bool ToggleActiveLocation(int locationId, bool isActive)
+        [HttpPost]
+        public bool ToggleActiveLocation(
+            [FromBody] int locationId, 
+            [FromBody] bool isActive)
         {
             var location = Db.Location.FirstOrDefault(x => x.Id == locationId);
             if (location == null) return false;
@@ -48,6 +53,13 @@ namespace ReactDemo.Services
             location.IsActive = isActive;
             Db.SaveChanges();
             return true;
+        }
+
+        [HttpGet]
+        public LocationModel GetById(int id)
+        {
+            return new LocationModel(
+                Db.Location.First(x => x.Id == id));
         }
     }
 }

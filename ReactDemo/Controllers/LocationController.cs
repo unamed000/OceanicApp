@@ -25,16 +25,31 @@ namespace ReactDemo.Controllers
             return _locationService.GetLocations();
         }
 
-        [HttpPost("[action]")]
-        public bool AddLocation(LocationModel model)
+        [HttpGet("[action]")]
+        public LocationModel GetById(int id)
         {
-            return _locationService.AddOrUpdateLocation(model);
+            return _locationService.GetById(id);
         }
 
         [HttpPost("[action]")]
-        public bool ToggleActive(int locationId, bool isActive)
+        public bool AddOrUpdateLocation([FromBody] LocationModel location)
         {
-            return _locationService.ToggleActiveLocation(locationId, isActive);
+            return _locationService.AddOrUpdateLocation(location);
         }
+
+        [HttpPost("[action]")]
+        public bool ToggleActive(
+            [FromBody] ToggleActiveRequestModel model)
+        {
+            return _locationService.ToggleActiveLocation(
+                model.LocationId, 
+                model.IsActive);
+        }
+    }
+
+    public class ToggleActiveRequestModel
+    {
+        public int LocationId { get; set; }
+        public bool IsActive { get; set; }
     }
 }

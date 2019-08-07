@@ -5,8 +5,63 @@ import { Switch, Route } from 'react-router';
 export class LocationList extends Component {
   constructor(props) {
     super(props);
-    this.state = { currentCount: 0 };
+    this.state = { locations: [] };
+    this.fetchData();
   }
+
+  onToggleActiveClicked(location, component)
+  {
+    var toggleActive = !location.isActive;
+    fetch("api/location/toggleActive", {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',                  
+      },
+      method: "POST",
+      body:  JSON.stringify({
+        locationId: location.locationId,
+        isActive: toggleActive
+      })
+    })
+    .then(function(response){ 
+      return response.json();   
+    })
+    .then(function(data){ 
+      if(data){
+        component.fetchData();
+      }
+    });
+  }
+
+  fetchData()
+  {
+    fetch('api/location/getAll')
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ locations: data, loading: false });
+    });
+  }
+
+  renderRow(item) {
+    return (
+      <tr>
+      <td>{item.name}</td>
+      <td>{item.code}</td>
+
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <a href={"/dashboard/locations/" + item.locationId} className="btn btn-primary">Edit</a>
+          {
+            item.isActive 
+              ? <button className="btn btn-danger" onClick={e => this.onToggleActiveClicked(item, this)}>Disable</button>
+              : <button className="btn btn-success" onClick={e => this.onToggleActiveClicked(item, this)}>Enable</button>
+          }
+        </div>
+      </td>
+    </tr>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -18,30 +73,11 @@ export class LocationList extends Component {
           <tr>
             <th>Location Name</th>
             <th>Location Code</th>
-
             <th></th>
           </tr>
-          <tr>
-            <td>Location A</td>
-            <td>LOCATIONA</td>
-
-            <td>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="/dashboard/locations/1" className="btn btn-primary">Edit</a>
-              <a href="/routes/" className="btn btn-danger">Disable</a>
-            </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Location B</td> 
-            <td>LOCATIONB</td>
-            <td>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <a href="/dashboard/locations/1" className="btn btn-primary">Edit</a>
-              <a href="/routes/" className="btn btn-success">Enable</a>
-            </div>
-            </td>
-          </tr>
+          {this.state.locations.map(item =>
+            this.renderRow(item)
+          )}
           </tbody>
         </table>
 
