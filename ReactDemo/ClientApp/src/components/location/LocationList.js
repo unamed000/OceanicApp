@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { LocationEditForm } from './LocationEditForm';
 import { Switch, Route } from 'react-router';
+import { Link } from 'react-router-dom'
 
 export class LocationList extends Component {
   constructor(props) {
@@ -48,7 +49,6 @@ export class LocationList extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       this.setState({ locations: data, loading: false });
     });
   }
@@ -61,7 +61,7 @@ export class LocationList extends Component {
 
       <td>
         <div class="btn-group" role="group" aria-label="Basic example">
-          <a href={"/dashboard/locations/" + item.locationId} className="btn btn-primary">Edit</a>
+          <Link to={"/dashboard/locations/" + item.locationId} className="btn btn-primary">Edit</Link>
           {
             item.isActive 
               ? <button className="btn btn-danger" onClick={e => this.onToggleActiveClicked(item, this)}>Disable</button>
@@ -77,8 +77,8 @@ export class LocationList extends Component {
     return (
       <div>
         <h4>Locations</h4>
+        <Link to="/dashboard/locations/0" className="btn btn-primary">+ Add</Link>
 
-        <a class="btn btn-primary">+ Add</a>
         <table className="table">
           <tbody>
           <tr>

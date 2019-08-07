@@ -39,7 +39,7 @@ namespace ReactDemo.Controllers
 
         [HttpPost("[action]")]
         public bool ToggleActive(
-            [FromBody] ToggleActiveRequestModel model)
+            [FromBody] ToggleActiveLocationRequestModel model)
         {
             return _locationService.ToggleActiveLocation(
                 model.LocationId, 
@@ -47,7 +47,7 @@ namespace ReactDemo.Controllers
         }
     }
 
-    public class ToggleActiveRequestModel
+    public class ToggleActiveLocationRequestModel
     {
         public int LocationId { get; set; }
         public bool IsActive { get; set; }

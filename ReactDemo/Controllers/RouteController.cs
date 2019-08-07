@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ReactDemo.Db;
 using ReactDemo.Models;
 using ReactDemo.Services;
 
@@ -12,9 +8,11 @@ namespace ReactDemo.Controllers
     [Route("api/[controller]")]
     public class RouteController : Controller
     {
+        private readonly RouteService _service;
+
         public RouteController()
         {
-
+            _service = new RouteService();
         }
 
         [HttpGet("[action]")]
@@ -27,8 +25,7 @@ namespace ReactDemo.Controllers
             double width,
             int productType)
         {
-            var service = new RouteService();
-            return service.FindRoute(
+            return _service.FindRoute(
                 departureCode, 
                 destinationCode, 
                 weight, 
@@ -38,5 +35,38 @@ namespace ReactDemo.Controllers
                 productType);
         }
 
+        [HttpGet("[action]")]
+        public List<RouteModel> GetAll()
+        {
+            return _service.GetAllRoutes();
+        }
+
+        [HttpGet("[action]")]
+        public RouteModel GetById(int id)
+        {
+            return _service.GetById(id);
+        }
+
+        [HttpPost("[action]")]
+        public bool AddOrUpdateRoute([FromBody] RouteUpdateModel route)
+        {
+            return _service.AddOrUpdateRoute(route);
+        }
+
+        [HttpPost("[action]")]
+        public bool ToggleActive(
+            [FromBody] ToggleActiveRouteRequestModel model)
+        {
+            return _service.ToggleActiveRoute(
+                model.RouteId,
+                model.IsActive);
+        }
+
+    }
+
+    public class ToggleActiveRouteRequestModel
+    {
+        public int RouteId { get; set; }
+        public bool IsActive { get; set; }
     }
 }

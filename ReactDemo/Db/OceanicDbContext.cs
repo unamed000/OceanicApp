@@ -41,7 +41,7 @@ namespace ReactDemo.Db
 
             modelBuilder.Entity<Route>(entity =>
             {
-                entity.HasKey(x => new { x.DepartureLocationId, x.DestinationLocationId });
+                entity.HasKey(x => x.Id);
 
                 entity.HasOne(e => e.DepartureLocation)
                     .WithMany(l => l.FromLocations)

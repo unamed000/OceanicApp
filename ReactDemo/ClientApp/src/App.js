@@ -22,8 +22,8 @@ export default class App extends Component {
           <Route path='/dashboard/locations/:locationId' component={LocationEditForm}/>
           <Route path='/dashboard/locations' component={LocationList} />
           
+          <Route path='/dashboard/routes/:routeId' component={RouteEditForm}/>
           <Route path='/dashboard/routes' component={RouteList} />
-          <Route path='/dashboard/editRoutes' component={RouteEditForm} />
 
           <Route path='/dashboard/settings' component={Settings} />
           <Route path='/dashboard/editWeightConfig' component={WeightConfigForm} />

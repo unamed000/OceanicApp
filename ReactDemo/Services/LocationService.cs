@@ -31,7 +31,10 @@ namespace ReactDemo.Services
             }
             else
             {
-                location = new Location();
+                location = new Location()
+                {
+                    IsActive = true,
+                };
                 Db.Location.Add(location);
             }
 
@@ -42,10 +45,9 @@ namespace ReactDemo.Services
             return true;
         }
 
-        [HttpPost]
         public bool ToggleActiveLocation(
-            [FromBody] int locationId, 
-            [FromBody] bool isActive)
+            int locationId, 
+            bool isActive)
         {
             var location = Db.Location.FirstOrDefault(x => x.Id == locationId);
             if (location == null) return false;
@@ -55,7 +57,6 @@ namespace ReactDemo.Services
             return true;
         }
 
-        [HttpGet]
         public LocationModel GetById(int id)
         {
             return new LocationModel(

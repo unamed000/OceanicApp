@@ -12,12 +12,16 @@ export class LocationEditForm extends Component {
         code: "",
       } 
     };
-    fetch('api/location/getById?id=' + this.props.match.params.locationId)
+    var locationId = this.props.match.params.locationId;
+    if(locationId != null && locationId != 0){
+      fetch('api/location/getById?id=' + this.props.match.params.locationId)
         .then(response => response.json())
         .then(data => {
           console.log(data);
           this.setState({ location: data, loading: false });
         });
+    }
+
   }
 
   handleFormSubmit(e, component){
@@ -43,9 +47,6 @@ export class LocationEditForm extends Component {
   handleChange(event) {
     let fieldName = event.target.name;
     let fleldVal = event.target.value;
-    console.log(event.target.name);
-    console.log(event.target.value);
-
     this.setState({location: {...this.state.location, [fieldName]: fleldVal}})
   }
 

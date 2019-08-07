@@ -12,6 +12,18 @@ namespace ReactDemo.Services
 {
     public class RouteService : BaseService
     {
+        public List<RouteModel> GetAllRoutes()
+        {
+            return Db.Route
+                .Include(x => x.DepartureLocation)
+                .Include(x => x.DestinationLocation)
+                .AsEnumerable()
+                .OrderBy(x => x.DepartureLocation.Name)
+                .ThenBy(x => x.DestinationLocation.Name)
+                .Select(x => new RouteModel(x))
+                .ToList();
+        }
+
         public SearchRouteModel FindRoute(
             string departureCode, 
             string destinationCode, 
@@ -21,8 +33,6 @@ namespace ReactDemo.Services
             double width,
             int productTypeId)
         {
-            // TODO: Exclude inactive locations, routes, add multiplier for product type calculation, weight calculation
-            // TODO: Return total value of the search criteria
             var routes = Db.Route
                 .Include(x => x.DepartureLocation)
                 .Include(x => x.DestinationLocation)
@@ -132,6 +142,48 @@ namespace ReactDemo.Services
 
             var path = result.GetPath();
             return path.Select(x => locationMapping.First(lm => lm.Value == x).Key).ToArray();
+        }
+
+        public RouteModel GetById(int id)
+        {
+            return new RouteModel(Db.Route
+                .Include(x => x.DepartureLocation)
+                .Include(x => x.DestinationLocation)
+                .First(x => x.Id == id));
+        }
+
+        public bool AddOrUpdateRoute(RouteUpdateModel routeModel)
+        {
+            Route route;
+
+            if (routeModel.Id != default(int))
+            {
+                route = Db.Route.First(x => x.IsActive);
+            }
+            else
+            {
+                route = new Route()
+                {
+                    IsActive = true,
+                };
+                Db.Route.Add(route);
+            }
+
+            route.DepartureLocationId = routeModel.DepartureLocationId;
+            route.DestinationLocationId = routeModel.DestinationLocationId;
+            Db.SaveChanges();
+
+            return true;
+        }
+
+        public bool ToggleActiveRoute(int routeId, bool isActive)
+        {
+            var route = Db.Route.FirstOrDefault(x => x.Id == routeId);
+            if (route == null) return false;
+
+            route.IsActive = isActive;
+            Db.SaveChanges();
+            return true;
         }
     }
 }

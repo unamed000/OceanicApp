@@ -9,6 +9,8 @@ namespace ReactDemo.Db
 {
     public class Route
     {
+        public int Id { get; set; }
+
         public int DepartureLocationId { get; set; }
         public int DestinationLocationId { get; set; }
 
