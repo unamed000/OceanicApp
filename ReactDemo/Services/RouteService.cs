@@ -88,7 +88,9 @@ namespace ReactDemo.Services
             {
                 graph.Connect(
                     locationMapping[route.DepartureLocationId],
-                    locationMapping[route.DestinationLocationId], 8, string.Empty);
+                    locationMapping[route.DestinationLocationId], 
+                    8, 
+                    string.Empty);
             }
 
             ShortestPathResult result = graph.Dijkstra(
