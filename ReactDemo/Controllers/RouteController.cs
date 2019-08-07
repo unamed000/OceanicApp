@@ -10,13 +10,23 @@ using ReactDemo.Services;
 namespace ReactDemo.Controllers
 {
     [Route("api/[controller]")]
-    public class SearchController : Controller
+    public class RouteController : Controller
     {
+        public RouteController()
+        {
+
+        }
+
         [HttpGet("[action]")]
-        public RouteModel SearchRoute(string departureCode, string destinationCode, double weight)
+        public SearchRouteModel SearchRoute(
+            string departureCode, 
+            string destinationCode, 
+            double weight,
+            int productType)
         {
             var service = new RouteService();
-            return service.FindRoute(departureCode, destinationCode, weight);
+            return service.FindRoute(departureCode, destinationCode, weight, productType);
         }
+
     }
 }

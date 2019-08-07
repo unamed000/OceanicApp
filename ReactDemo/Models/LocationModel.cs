@@ -1,11 +1,20 @@
 ﻿using System;
+using ReactDemo.Db;
 
 namespace ReactDemo.Models
 {
     public class LocationModel : IEquatable<LocationModel>
     {
+        public LocationModel(Location location)
+        {
+            LocationId = location.Id;
+            Name = location.Name;
+            Code = location.Code;
+        }
+
         public int LocationId { get; set; }
         public string Name { get; set; }
+        public string Code { get; set; }
 
         public bool Equals(LocationModel other)
         {

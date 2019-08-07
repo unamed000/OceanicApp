@@ -18,6 +18,8 @@ namespace ReactDemo.Db
 
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Route> Route { get; set; }
+        public virtual DbSet<ProductType> ProductType { get; set; }
+        public virtual DbSet<WeightCostSetting> WeightCostSetting { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -31,6 +33,7 @@ namespace ReactDemo.Db
         {
             modelBuilder.Entity<Location>(entity =>
             {
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Code).IsRequired();
             });
 
@@ -45,6 +48,19 @@ namespace ReactDemo.Db
                 entity.HasOne(e => e.DestinationLocation)
                     .WithMany(l => l.ToLocations)
                     .HasForeignKey(e => e.DestinationLocationId);
+            });
+
+            modelBuilder.Entity<ProductType>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+            });
+
+            modelBuilder.Entity<WeightCostSetting>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.WeightFrom).IsRequired();
+                entity.Property(x => x.WeightTo).IsRequired();
+                entity.Property(x => x.Cost).IsRequired();
             });
         }
     }

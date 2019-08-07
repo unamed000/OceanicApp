@@ -14,5 +14,7 @@ namespace ReactDemo.Db
 
         public virtual Location DepartureLocation { get; set; }
         public virtual Location DestinationLocation { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }
