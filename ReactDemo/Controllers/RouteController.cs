@@ -22,10 +22,20 @@ namespace ReactDemo.Controllers
             string departureCode, 
             string destinationCode, 
             double weight,
+            double height,
+            double depth,
+            double width,
             int productType)
         {
             var service = new RouteService();
-            return service.FindRoute(departureCode, destinationCode, weight, productType);
+            return service.FindRoute(
+                departureCode, 
+                destinationCode, 
+                weight, 
+                height,
+                depth,
+                width,
+                productType);
         }
 
     }

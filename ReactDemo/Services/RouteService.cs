@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Dijkstra.NET.Graph;
 using Dijkstra.NET.ShortestPath;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using ReactDemo.Db;
 using ReactDemo.Models;
 
@@ -14,6 +16,9 @@ namespace ReactDemo.Services
             string departureCode, 
             string destinationCode, 
             double weight,
+            double height,
+            double depth,
+            double width,
             int productTypeId)
         {
             // TODO: Exclude inactive locations, routes, add multiplier for product type calculation, weight calculation
@@ -27,9 +32,18 @@ namespace ReactDemo.Services
                 Db.ProductType.First(x => x.Id == productTypeId);
 
             decimal decWeight = (decimal)weight;
+            SizeCategory category = FindSizeCategory(height, depth, width);
+
+            if (category == null)
+            {
+                throw new Exception("Can't find a valid size category");
+            }
 
             var weightConfig =
-                Db.WeightCostSetting.First(x => x.WeightFrom <= decWeight && x.WeightTo >= decWeight);
+                Db.WeightCostSetting.First(x => 
+                    x.WeightFrom < decWeight 
+                    && x.WeightTo >= decWeight 
+                    && x.SizeCategoryId == category.Id);
 
             var locations = Db.Location.ToList();
             var path = FindRoutes(locations, routes, departureCode, destinationCode);
@@ -62,6 +76,25 @@ namespace ReactDemo.Services
         double PriceCalculate(WeightCostSetting weightSetting, ProductType productType)
         {
             return (double)weightSetting.Cost * (double)productType.Multiplier;
+        }
+
+        SizeCategory FindSizeCategory(
+            double height,
+            double depth,
+            double width)
+        {
+            var heightDec = (decimal) height;
+            var depthDec = (decimal) depth;
+            var widthDec = (decimal) width;
+
+            var size = Db.SizeCategory
+                .Where(x => x.Depth >= depthDec
+                            && x.Height >= heightDec
+                            && x.Width >= widthDec)
+                .OrderBy(x => x.Id)
+                .FirstOrDefault();
+
+            return size;
         }
 
         int[] FindRoutes(

@@ -6,5 +6,8 @@
         public decimal WeightFrom { get; set; }
         public decimal WeightTo { get; set; }
         public decimal Cost { get; set; }
+
+        public int SizeCategoryId { get; set; }
+        public SizeCategory SizeCategory { get; set; }
     }
 }

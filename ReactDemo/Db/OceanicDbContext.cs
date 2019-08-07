@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
@@ -19,6 +20,7 @@ namespace ReactDemo.Db
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Route> Route { get; set; }
         public virtual DbSet<ProductType> ProductType { get; set; }
+        public virtual DbSet<SizeCategory> SizeCategory { get; set; }
         public virtual DbSet<WeightCostSetting> WeightCostSetting { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -60,7 +62,22 @@ namespace ReactDemo.Db
                 entity.HasKey(x => x.Id);
                 entity.Property(x => x.WeightFrom).IsRequired();
                 entity.Property(x => x.WeightTo).IsRequired();
+                entity.Property(x => x.SizeCategoryId).IsRequired();
+
+                entity.HasOne(e => e.SizeCategory)
+                    .WithMany(l => l.WeightCostSettings)
+                    .HasForeignKey(e => e.SizeCategoryId);
+
                 entity.Property(x => x.Cost).IsRequired();
+            });
+
+
+            modelBuilder.Entity<SizeCategory>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Depth).IsRequired();
+                entity.Property(x => x.Height).IsRequired();
+                entity.Property(x => x.Width).IsRequired();
             });
         }
     }
