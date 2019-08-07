@@ -48,14 +48,17 @@ export class Home extends Component {
           <tr>
             <th>Departure</th>
             <th>Destination</th> 
+            <th>Responsible side</th>
           </tr>
           <tr>
             <td>Location A</td>
             <td>Location B</td> 
+            <td>Oceanic Airlines</td> 
           </tr>
           <tr>
             <td>Location B</td>
             <td>Location C</td> 
+            <td>East India</td> 
           </tr>
           </tbody>
         </table>
@@ -71,14 +74,17 @@ export class Home extends Component {
           <tr>
             <th>Departure</th>
             <th>Destination</th> 
+            <th>Responsible side</th>
           </tr>
           <tr>
             <td>Location A</td>
             <td>Location B</td> 
+            <td>East India</td> 
           </tr>
           <tr>
             <td>Location B</td>
             <td>Location C</td> 
+            <td>Telstar</td> 
           </tr>
           </tbody>
         </table>

@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Glyphicon, Nav, Navbar, NavItem, Image } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import './NavMenu.css';
 
@@ -12,7 +12,7 @@ export class NavMenu extends Component {
       <Navbar inverse fixedTop fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={'/'}>Oceanic</Link>
+            <Link to={'/'}><Image width="7%" src={process.env.PUBLIC_URL + "/oceanic-logo.png"}></Image></Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -36,6 +36,11 @@ export class NavMenu extends Component {
             <LinkContainer to={'/dashboard/settings'}>
               <NavItem>
                 <Glyphicon glyph='th-list' /> Settings
+              </NavItem>
+            </LinkContainer>
+            <LinkContainer to={'/logout'}>
+              <NavItem>
+                <Glyphicon glyph='log-out' /> Logout
               </NavItem>
             </LinkContainer>
           </Nav>
