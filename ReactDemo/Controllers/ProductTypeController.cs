@@ -17,7 +17,7 @@ namespace ReactDemo.Controllers
         }
 
         [HttpGet("[action]")]
-        public List<ProductTypeModel> GetProductTypes()
+        public List<ProductTypeModel> GetAll()
         {
             return _service.GetAllProductTypes();
         }
